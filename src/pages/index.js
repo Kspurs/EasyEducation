@@ -114,7 +114,7 @@ const links = [
     color: "#8EB814",
   },
   {
-    text: "Build and Host",
+    text: "Build and iiiiiiiiiiiiiiiiit",
     url: "https://www.gatsbyjs.com/cloud",
     badge: true,
     description:
