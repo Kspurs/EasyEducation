@@ -5,7 +5,6 @@ import {Typography} from '@mui/material'
 const Chatmessage=({username,text})=>{
     return (
         <Box sx={{display:'block'}}>
-            <Avatar src="/src/images/icon.png" sx={{width:24,height:24}}></Avatar>
             <Typography display='block' sx={{overflowWrap:'anywhere'}} gutterBottom>{username}:{text}</Typography>
         </Box>
     )
