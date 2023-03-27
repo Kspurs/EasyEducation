@@ -40,7 +40,7 @@ const Liveroom = ({ url }) => {
             <Grid item xs={12}><ResponsiveAppBar></ResponsiveAppBar></Grid>
             <Grid item container xs={9}>
                 <Grid item xs={12}>
-                    <Playvideo></Playvideo> 
+                    
                 </Grid>
                 <Grid item xs={12}>
                     <Box height={100} >
