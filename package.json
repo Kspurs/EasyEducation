@@ -14,15 +14,26 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@babel/runtime": "^7.21.0",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@fontsource/roboto": "^4.5.8",
     "@mdx-js/react": "^2.3.0",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.13",
+    "babel-runtime": "^6.26.0",
+    "flv.js": "^1.6.2",
     "gatsby": "^5.7.0",
     "gatsby-plugin-image": "^3.7.0",
     "gatsby-plugin-mdx": "^5.7.0",
     "gatsby-plugin-sharp": "^5.7.0",
     "gatsby-source-filesystem": "^5.7.0",
+    "jsonp": "^0.2.1",
     "minipass": "2.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-webcam": "^7.0.1",
+    "reflv": "^0.0.1",
     "sharp": "^0.31.3"
   }
 }
