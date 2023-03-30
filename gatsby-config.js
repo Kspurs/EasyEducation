@@ -6,12 +6,6 @@ module.exports = {
     siteUrl: `https://www.yourdomain.tld`,
     title: "Mypage"
   },
-  plugins: ["gatsby-plugin-image","gatsby-plugin-sharp",{
-    resolve: "gatsby-source-filesystem",
-    options: {
-      name: `static`,
-      path: `${__dirname}/static`,
-    }
-  }
+  plugins: ["gatsby-plugin-image","gatsby-plugin-sharp"
   ,"gatsby-plugin-mdx",],
 }

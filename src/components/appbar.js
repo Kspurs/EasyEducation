@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { purple } from '@mui/material/colors';
 import { navigate } from 'gatsby';
-
+import { StaticImage } from 'gatsby-plugin-image';
 const pages = ['Browse', 'My Course'];
 const settings = ['Profile', 'Logout'];
 
@@ -115,7 +115,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                
+                <StaticImage src='../images/icon.png' width={24} height={24}></StaticImage>
               </IconButton>
             </Tooltip>
             <Menu

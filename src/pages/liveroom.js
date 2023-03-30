@@ -18,6 +18,8 @@ import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
 import Chatmessage from '../components/chatmessage';
 import { width } from '@mui/system';
+import { useState } from 'react';
+import { useRef } from 'react';
 const theme = createTheme({
     status: {
         danger: '#e53e3e',
@@ -35,17 +37,27 @@ const theme = createTheme({
 });
 const messages = [{ user: 'user1', text: "hello" }, { user: 'user2', text: "How are You" }]
 const Liveroom = ({ url }) => {
+    const CourseName="Advancd Math"
+    const TeacherName="MR.Li"
+    const [msgstatus, setmsgstatus] = useState([])
+    const ref = useRef(0)
+    var ws=new WebSocket("ws://localhost:8081")
+    ws.addEventListener("message",(e)=>{
+        var msglst=msgstatus
+        msglst.push(e)
+        setmsgstatus(msglst)
+    })
     return (
         <Grid container >
             <Grid item xs={12}><ResponsiveAppBar></ResponsiveAppBar></Grid>
             <Grid item container xs={9}>
                 <Grid item xs={12}>
-                    
+                
                 </Grid>
                 <Grid item xs={12}>
                     <Box height={100} >
-                        <Typography>CourseName</Typography>
-                        <Typography>TeacherName</Typography>
+                        <Typography>{CourseName}</Typography>
+                        <Typography>{TeacherName}</Typography>
                     </Box>
                 </Grid>
             </Grid>
@@ -59,15 +71,15 @@ const Liveroom = ({ url }) => {
                     textDecoration: 'none',
                 }}>Chat Room</Typography>
                 <Box sx={{ height: 500 }}>
-            
-                        <Chatmessage text="Hello asdouoquwi ouoqwueoiquwiou eoiqwoweoiqiowe" username="User">
-
-                        </Chatmessage>
-                   
+                    {msgstatus.map((msg)=>{
+                        <Chatmessage text={msg}></Chatmessage>
+                    })}
                 </Box>
-                <TextField fullWidth defaultValue='Send Message' id="fullWidth" />
+                <TextField inputRef={ref} fullWidth defaultValue='Send Message' id="text" />
                 <ThemeProvider theme={theme}>
-                    <Button color="neutral" variant="contained">
+                    <Button color="neutral" variant="contained" onClick={()=>{
+                        ws.send(ref.current.value)
+                    }}>
                         Send
                     </Button>
                 </ThemeProvider>
