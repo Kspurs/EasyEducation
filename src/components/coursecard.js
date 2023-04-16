@@ -10,7 +10,7 @@ export default function MediaCard({ coursename }) {
   return (
     <Card sx={{ maxWidth: 300 }}>
     <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" component="div" href="/courseinfo">
           {coursename}
         </Typography>
         <Typography variant="body2" color="text.secondary">
