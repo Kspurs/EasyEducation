@@ -8,7 +8,6 @@ const Playvideo=()=>{
       isLive
       cors
       hasAudio={false}
-      
     />
     )
 }
