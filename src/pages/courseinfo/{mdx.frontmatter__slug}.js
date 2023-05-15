@@ -15,13 +15,11 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 const CourseInfo = ({ props, children,data }) => {
   const coursebrief = "This is a brief introduction to the course"
   const teacherbrief = "This is a brief introduction to the teacher"
-  let featuredImg1 = getImage(data.mdx.frontmatter.featuredImage1?.childImageSharp?.gatsbyImageData)
-  let featuredImg2 = getImage(data.mdx.frontmatter.featuredImage2?.childImageSharp?.gatsbyImageData)
   console.log(data.mdx.frontmatter)
   return (
-    <div>
+    <div style={{height:'100%'}}>
       <ResponsiveAppBar></ResponsiveAppBar>
-      <Box sx={{marginTop:'30px'}}>
+      <Box sx={{marginTop:'30px',height:'100%'}}>
         <Typography sx={{
           mr: 2,
           display: 'inline',
@@ -35,7 +33,7 @@ const CourseInfo = ({ props, children,data }) => {
         <Button sx={{display:'inline',marginLeft:'50px'}} variant='contained' onClick={() => {
           navigate('/liveroom')
         }}>Open Liveroom</Button>
-        <BasicTabs img1={featuredImg1} img2={featuredImg2}>{children}</BasicTabs>
+        <BasicTabs courseintro={data.mdx.frontmatter.courseintro} teacherintro={data.mdx.frontmatter.teacherintro}></BasicTabs>
       </Box>
     </div>
   )
@@ -45,16 +43,8 @@ export const query = graphql`
     mdx(id: {eq: $id}) {
       frontmatter {
         title
-        featuredImage1{
-          childrenImageSharp{
-            gatsbyImageData(width: 800)
-          }
-        }
-        featuredImage2{
-          childrenImageSharp{
-            gatsbyImageData(width: 800)
-          }
-        }
+        courseintro
+        teacherintro
         date(formatString: "MMMM D, YYYY")
       }
     }
