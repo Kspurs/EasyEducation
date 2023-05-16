@@ -46,12 +46,16 @@ const Liveroom = ({ url }) => {
     const [msgstatus, setmsgstatus] = useState([])
     const ref = useRef(0)
     var ws=new WebSocket("ws://localhost:8081")
+    if(!isBrowser)
+    {
+        return null;
+    }
     return (
         <Grid container >
             <Grid item xs={12}><ResponsiveAppBar></ResponsiveAppBar></Grid>
             <Grid item container xs={9}>
                 <Grid item xs={12} sx={{paddingTop:'30px',paddingRight:'30px'}}>
-                {isBrowser&&<Playvideo></Playvideo>}
+                <Playvideo></Playvideo>
                 </Grid>
                 <Grid item xs={12} sx={{paddingRight:'30px'}}>
                 <Box sx={{display:'flex',bgcolor:purple[200]}}>
