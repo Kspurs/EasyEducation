@@ -19,6 +19,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import Chatmessage from '../components/chatmessage';
 import { width } from '@mui/system';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { useRef } from 'react';
 import PeopleIcon from '@mui/icons-material/People';
 import SimpleDialogDemo from '../components/liveroomuserdialog';
@@ -44,18 +45,16 @@ const Liveroom = ({ url }) => {
     const CourseName="Advancd Math"
     const TeacherName="MR.Li"
     const [msgstatus, setmsgstatus] = useState([])
+    const [isplaying, setplay] = useState(false)
     const ref = useRef(0)
     var ws=new WebSocket("ws://localhost:8081")
-    if(!isBrowser)
-    {
-        return null;
-    }
+    useEffect(()=>setplay(true),[])
     return (
         <Grid container >
             <Grid item xs={12}><ResponsiveAppBar></ResponsiveAppBar></Grid>
             <Grid item container xs={9}>
                 <Grid item xs={12} sx={{paddingTop:'30px',paddingRight:'30px'}}>
-                <Playvideo></Playvideo>
+                <Playvideo isplaying={isplaying}></Playvideo>
                 </Grid>
                 <Grid item xs={12} sx={{paddingRight:'30px'}}>
                 <Box sx={{display:'flex',bgcolor:purple[200]}}>
