@@ -37,6 +37,7 @@ const theme = createTheme({
         },
     },
 });
+export const isBrowser = () => typeof window !== "undefined"
 const onlinepeople=50
 const messages = [{ user: 'user1', text: "hello" }, { user: 'user2', text: "How are You" },{ user: 'user1', text: "hello" }, { user: 'user2', text: "How are You" },{ user: 'user1', text: "hello" }, { user: 'user2', text: "How are You" },{ user: 'user1', text: "hello" }, { user: 'user2', text: "How are You" },{ user: 'user1', text: "hello" }, { user: 'user2', text: "How are You" },{ user: 'user1', text: "hello" }, { user: 'user2', text: "How are You" },{ user: 'user1', text: "hello" }, { user: 'user2', text: "How are You" },{ user: 'user1', text: "hello" }, { user: 'user2', text: "How are You" }]
 const Liveroom = ({ url }) => {
@@ -50,7 +51,7 @@ const Liveroom = ({ url }) => {
             <Grid item xs={12}><ResponsiveAppBar></ResponsiveAppBar></Grid>
             <Grid item container xs={9}>
                 <Grid item xs={12} sx={{paddingTop:'30px',paddingRight:'30px'}}>
-                <Playvideo></Playvideo>
+                {isBrowser&&<Playvideo></Playvideo>}
                 </Grid>
                 <Grid item xs={12} sx={{paddingRight:'30px'}}>
                 <Box sx={{display:'flex',bgcolor:purple[200]}}>
