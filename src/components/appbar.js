@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { purple } from '@mui/material/colors';
+import { purple ,blue} from '@mui/material/colors';
 import { navigate } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
 const pages = ['Browse', 'My Course'];
@@ -38,7 +38,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" color='default'>
+    <AppBar position="static" color='inherit'>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           

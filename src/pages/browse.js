@@ -17,6 +17,7 @@ const Courselink = ({ coursename, coursestate }) => {
 const CourseBrowser = () => {
     const courses = [[{ name: "advanced-math", state: "live" },{name:"C Language", state: "live" },{name:"Discrete Math",state:"not live"},{ name: "Politics", state: "live" },{name:"English Writing",state:"not live"}],[{name:"English Writing",state:"not live"}]]
     const [currentpage,setPage]= useState(0);
+    console.log(localStorage.getItem("id"))
     return (
         <Box sx={{backgroundColor:grey[100],height:'750px'}}>
             <Grid container rowSpacing={5} sx={{}}>

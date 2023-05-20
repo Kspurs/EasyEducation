@@ -42,8 +42,11 @@ const messages = [{ user: 'user1', text: "hello" }, { user: 'user2', text: "How 
 const Liveroom = ({ url }) => {
     const CourseName="Advancd Math"
     const TeacherName="MR.Li"
-    const [msgstatus, setmsgstatus] = useState([])
-    const ref = useRef(0)
+    var sndmsg=""
+    const setmsg=(s)=>{
+        sndmsg=s
+    }
+    const ref = useRef(null)
     var ws=new WebSocket("ws://localhost:8081")
     return (
         <Grid container >
@@ -81,10 +84,12 @@ const Liveroom = ({ url }) => {
                         (<Chatmessage key={msg.user} username={msg.user} text={msg.text}></Chatmessage>)
                     )}
                 </Box>
-                <TextField  inputRef={ref} fullWidth defaultValue='Send Message' id="text" sx={{marginTop:'30px',marginBottom:'20px'}}/>
+                <TextField fullWidth defaultValue='Send Message' id="text" onChange={(event)=>{
+                    setmsg(event.target.value)
+                }} sx={{marginTop:'30px',marginBottom:'20px'}}/>
                 <ThemeProvider theme={theme}>
                     <Button color="neutral" variant="contained" onClick={()=>{
-                        ws.send(ref.current.value)
+                        ws.send(sndmsg)
                     }}>
                         Send
                     </Button>
