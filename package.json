@@ -30,6 +30,7 @@
     "babel-runtime": "^6.26.0",
     "chart.js": "^4.3.0",
     "dayjs": "^1.11.7",
+    "faker": "^6.6.6",
     "flv.js": "^1.6.2",
     "gatsby": "^5.7.0",
     "gatsby-plugin-compile-es6-packages": "^2.1.1",
@@ -45,8 +46,6 @@
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
-    "react-native-chart-kit": "^6.12.0",
-    "react-native-svg": "^13.9.0",
     "react-webcam": "^7.0.1",
     "reflv": "^0.0.1",
     "sharp": "^0.31.3"
