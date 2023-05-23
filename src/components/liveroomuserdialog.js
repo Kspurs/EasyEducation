@@ -13,8 +13,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
-
-const emails = ['user1', 'user2'];
+import { CheckBox } from '@mui/icons-material';
+const emails = ['摄像头', '屏幕', '麦克风'];
 
 function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
@@ -34,12 +34,8 @@ function SimpleDialog(props) {
         {emails.map((email) => (
           <ListItem disableGutters>
             <ListItemButton onClick={() => handleListItemClick(email)} key={email}>
-              <ListItemAvatar>
-                <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
-                  <PersonIcon />
-                </Avatar>
-              </ListItemAvatar>
               <ListItemText primary={email} />
+              <CheckBox ></CheckBox>
             </ListItemButton>
           </ListItem>
         ))}
@@ -70,7 +66,7 @@ export default function SimpleDialogDemo() {
   return (
     <div style={{display:'inline-block',marginLeft:'20px'}}>
       <Button variant="contained" onClick={handleClickOpen}>
-        Liveroom User
+        直播设置
       </Button>
       <SimpleDialog
         selectedValue={selectedValue}

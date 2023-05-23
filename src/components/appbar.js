@@ -15,7 +15,9 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { purple ,blue} from '@mui/material/colors';
 import { navigate } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
-const pages = ['Browse', 'My Course'];
+const stupages = [{name:'浏览',url:'/browse'},{name:'我的课程',url:'/mycourse'},{name:'添加课程',url:'/addcourse'}];
+const teapages = [{name:'浏览',url:'/browse'},{name:'我的课程',url:'/mycoursetea'},{name:'创建课程',url:'/createcourse'}];
+
 const settings = ['Profile', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -89,23 +91,23 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={()=>navigate(`/${page}`)}>
-                  <Typography textAlign="center" href={`/${page}`}>{page}</Typography>
+              {(localStorage.getItem('role')==='student'?stupages:teapages).map((page) => (
+                <MenuItem key={page.name} onClick={()=>navigate(`${page.url}`)}>
+                  <Typography textAlign="center" href={`localhost/${page.url}`}>{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           
           <Box sx={{ flexGrow: 3, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {(localStorage.getItem('role')==='student'?stupages:teapages).map((page) => (
               <Box>
               <Button
-                key={page}
-                onClick={()=>navigate(`/${page.toLowerCase().replace(' ','')}`)}
+                key={page.name}
+                onClick={()=>navigate(`${page.url}`)}
                 sx={{ my: 2, color: purple[500], display: 'block' ,fontWeight:"bold"}}
               >
-                {page}
+                {page.name}
               </Button>
               
               </Box>

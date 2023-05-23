@@ -6,9 +6,7 @@ module.exports = {
     siteUrl: `https://www.yourdomain.tld`,
     title: "Mypage"
   },
-  flags: {
-    DEV_SSR: true
-  },
+  
   plugins: ["gatsby-plugin-image","gatsby-plugin-sharp",`gatsby-transformer-sharp`,
   `gatsby-transformer-remark`,{
     resolve: `gatsby-plugin-compile-es6-packages`,

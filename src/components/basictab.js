@@ -20,7 +20,7 @@ import { Link } from '@mui/material/';
 import CheckTwoToneIcon from '@mui/icons-material/CheckTwoTone';
 import ErrorOutlineTwoToneIcon from '@mui/icons-material/ErrorOutlineTwoTone';
 import { PieChart } from '@mui/icons-material';
-import Piechart from './chart';
+
 function TabPanel(props) {
   const { children, value, index, courseintro, teacherintro, ...other } = props;
 
@@ -132,7 +132,7 @@ function HomeworkPanel(props) {
             <Paper elevation={4}>
               <Typography align='center' sx={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '30px' }}>Assignment Submission Status</Typography>
               <Divider></Divider>
-              <Piechart></Piechart>
+              
             </Paper>
             </Grid>
           </Grid>

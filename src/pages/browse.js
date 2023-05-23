@@ -9,12 +9,20 @@ import {Paper} from '@mui/material';
 import { Box } from '@mui/material';
 import {Pagination} from '@mui/material';
 import { useState } from 'react';
+import { navigate } from 'gatsby';
 const Courselink = ({ coursename, coursestate }) => {
     return (
         <Paper elevation={4} sx={{textAlign:'center'}}><Button href='/liveroom' variant="text" sx={{ color: 'black', fontFamily: 'monospace', fontSize: '20px' }}>{coursename}</Button></Paper>
     )
 }
 const CourseBrowser = () => {
+    React.useEffect(()=>{
+        if(localStorage.length==0)
+    {
+        navigate('/login')
+    }
+    })
+
     const courses = [[{ name: "advanced-math", state: "live" },{name:"C Language", state: "live" },{name:"Discrete Math",state:"not live"},{ name: "Politics", state: "live" },{name:"English Writing",state:"not live"}],[{name:"English Writing",state:"not live"}]]
     const [currentpage,setPage]= useState(0);
     console.log(localStorage.getItem("id"))
