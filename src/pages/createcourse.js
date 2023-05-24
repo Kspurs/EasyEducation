@@ -1,9 +1,10 @@
-import { Autocomplete, Box, Button, Divider, Paper, TextField, Typography } from "@mui/material";
+import { Autocomplete, Box, Button, Divider, Paper, TextField, Typography ,Input} from "@mui/material";
 import React, { useState } from "react";
 import ResponsiveAppBar from "../components/appbar";
 import { green, red } from "@mui/material/colors";
-import { createcourse } from "../api/api";
+import { createcourse,uploadfile } from "../api/api";
 import { navigate } from "gatsby";
+import { Buffer } from "buffer";
 import { async } from "@babel/runtime/helpers/regeneratorRuntime";
 const weekdays=['周一','周二','周三','周四','周五','周六','周日']
 const times=['8:00-9:00','9:00-10:00','10:00-11:00','11:00-12:00','13:00-14:00','14:00-15:00','15:00-16:00','16:00-17:00']
@@ -14,8 +15,10 @@ const Createcourse=()=>{
     const [coursestarttime,setcoursestarttime]=useState('')
     const [coursemax,setcoursemax]=useState(0)
     const [coursedescription,setcoursedescription]=useState('')
+    const [courseavatar,setcourseavatar]=useState(null)
     const  handleclick=async()=>
     {
+        uploadfile(courseavatar,coursename+'_avatar')
         const res=await createcourse(coursename,coursedescription,courseteacher,courseweekday,coursestarttime,coursemax)
         if(res.state=="success")
         {
@@ -43,6 +46,8 @@ const Createcourse=()=>{
         <Autocomplete options={times} sx={{width:'300px'}} onChange={(event,value)=>setcoursestarttime(value)} renderInput={(params)=>(<TextField {...params} ></TextField>)}></Autocomplete>
         
         </Box>
+        <Typography sx={{fontFamily:'monospace',fontWeight:'700',fontSize:'20px',mt:'10px',mb:'10px'}}>上传课程封面</Typography>
+        <Input type="file" onChange={(event)=>setcourseavatar(event.target.files[0])}></Input>
         <Typography sx={{fontFamily:'monospace',fontWeight:'700',fontSize:'20px',mt:'10px',mb:'10px'}}>最大选课人数</Typography>
         <TextField label='最大选课人数' onChange={(event)=>setcoursemax(Number.parseInt(event.target.value))}></TextField>
         <Typography sx={{fontFamily:'monospace',fontWeight:'700',fontSize:'20px',mt:'10px',mb:'10px'}}>课程简介</Typography>

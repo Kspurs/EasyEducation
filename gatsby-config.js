@@ -1,6 +1,7 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+require('dotenv').config();
 module.exports = {
   siteMetadata: {
     siteUrl: `https://www.yourdomain.tld`,
@@ -14,11 +15,6 @@ module.exports = {
       modules: [`react-native-chart-kit`,`react-native-svg`]
     }
   },{
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `coursebrief`,
-      path: `${__dirname}/coursebrief/`,
-    }},{
     resolve: `gatsby-source-filesystem`,
     options: {
       name: `coursebrief`,

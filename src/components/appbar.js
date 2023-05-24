@@ -134,6 +134,7 @@ function ResponsiveAppBar() {
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
+              
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (

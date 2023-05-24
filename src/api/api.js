@@ -1,6 +1,7 @@
 import { async } from "@babel/runtime/helpers/regeneratorRuntime"
-
 const url = "http://localhost:3000"
+const cloudName="dkehsqtv6"
+const api_key="341428297654848"
 const call = async (url, method, data) => {
     const res = await fetch(url, {
         method: 'POST',
@@ -24,4 +25,22 @@ const createcourse = (coursename, description, courseteacher, courseweekday, cou
     )
     return res;
 }
-export { login, createcourse }
+const getteachercourses = (teacherid) => {
+    const res = call(url + "/getteachercourses", "POST", { teacherid: teacherid })
+    return res;
+}
+const uploadfile=(file,filename)=>{
+ // Assuming you have a File object
+
+const fileReader = new FileReader();
+
+fileReader.onload = async function () {
+  const dataURL = this.result; // The file data as a Data URL
+  // Use the dataURL as needed
+    const res=await call(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, "POST", {file:dataURL,upload_preset:"autoupload",public_id:filename})
+    console.log(res)
+};
+
+fileReader.readAsDataURL(file);
+}
+export { uploadfile,login, createcourse ,getteachercourses}

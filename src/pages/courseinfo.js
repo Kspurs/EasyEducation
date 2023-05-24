@@ -1,18 +1,18 @@
 import * as React from 'react'
 import Grid from '@mui/material/Grid';
-import ResponsiveAppBar from '../../components/appbar'
+import ResponsiveAppBar from '../components/appbar'
 import { AppBar, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import MediaCard from '../../components/coursecard';
+import MediaCard from '../components/coursecard';
 import { grey } from '@mui/material/colors';
 import Tab from '@mui/material/Tab';
-import BasicTabs from '../../components/basictab';
+import BasicTabs from '../components/basictab';
 import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 import { purple } from '@mui/material/colors';
 import { Box } from '@mui/material';
 import { graphql, navigate, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import SimpleDialogDemo from '../../components/liveroomuserdialog';
+import SimpleDialogDemo from '../components/liveroomuserdialog';
 const liveserver = "http://localhost:9001/demos"
 const CourseInfo = ({ props, children,data }) => {
   const courseid='1'
@@ -47,16 +47,5 @@ const CourseInfo = ({ props, children,data }) => {
     </div>
   )
 }
-export const query = graphql`
-  query ($id: String) {
-    mdx(id: {eq: $id}) {
-      frontmatter {
-        title
-        courseintro
-        teacherintro
-        date(formatString: "MMMM D, YYYY")
-      }
-    }
-  }
-`
+
 export default CourseInfo
