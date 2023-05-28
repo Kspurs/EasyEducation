@@ -18,7 +18,14 @@ const login = (usrname, pswd) => {
     const data = call(url + "/login", "POST", { username: usrname, password: pswd })
     return data;
 }
-
+const addCourse=(usrname,coursename)=>{
+    const data=call(url+'/addCourse','POST',{usrname:usrname,coursename:coursename})
+    return data
+}
+const getSelectedCourse=(usrname)=>{
+    const data=call(url+'/getSelectedCourse','GET',{usrname:usrname})
+    return data
+}
 const createcourse = (coursename, description, courseteacher, courseweekday, coursestarttime, coursemax) => {
     const res =  call(
         url + "/createcourse", 'POST', { coursename: coursename, description: description, courseteacher: courseteacher, courseweekday: courseweekday, coursestarttime: coursestarttime, coursemax: coursemax }
@@ -26,7 +33,7 @@ const createcourse = (coursename, description, courseteacher, courseweekday, cou
     return res;
 }
 const getteachercourses = (teacherid) => {
-    const res = call(url + "/getteachercourses", "POST", { teacherid: teacherid })
+    const res = call(url + "/getteachercourses", "GET", { teacherid: teacherid })
     return res;
 }
 const uploadfile=(file,filename)=>{
@@ -43,4 +50,4 @@ fileReader.onload = async function () {
 
 fileReader.readAsDataURL(file);
 }
-export { uploadfile,login, createcourse ,getteachercourses}
+export {addCourse,getSelectedCourse, uploadfile,login, createcourse ,getteachercourses}

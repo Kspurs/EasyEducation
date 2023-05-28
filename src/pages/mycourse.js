@@ -11,11 +11,15 @@ import { Pagination } from '@mui/material';
 import { useState } from 'react';
 import { Barchart } from '../components/barchart';
 import { Piechart } from '../components/piechart';
-
+import { getSelectedCourse } from '../api/api';
+import { async } from '@babel/runtime/helpers/regeneratorRuntime';
 const Mycourse = () => {
     const [searchWord, setSearchWord] = useState('')
-    const selectedcourses=['C++','Java','Python','C#','C','JavaScript']
-
+    const [selectedcourses, setSelectedCourses] = useState([])
+    React.useEffect(async() => {
+        const res = await getSelectedCourse(localStorage.getItem("id"));
+        setSelectedCourses(res.data);
+    }, [])
     return (
         <main style={{ height: '100%', marginBottom: '0 ' }}>
             <ResponsiveAppBar></ResponsiveAppBar>

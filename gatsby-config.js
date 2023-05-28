@@ -10,11 +10,6 @@ module.exports = {
   
   plugins: ["gatsby-plugin-image","gatsby-plugin-sharp",`gatsby-transformer-sharp`,
   `gatsby-transformer-remark`,{
-    resolve: `gatsby-plugin-compile-es6-packages`,
-    options: {
-      modules: [`react-native-chart-kit`,`react-native-svg`]
-    }
-  },{
     resolve: `gatsby-source-filesystem`,
     options: {
       name: `coursebrief`,
