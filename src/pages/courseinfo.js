@@ -14,12 +14,11 @@ import { graphql, navigate, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import SimpleDialogDemo from '../components/liveroomuserdialog';
 const liveserver = "http://localhost:9001/demos"
-const CourseInfo = ({ props, children,data }) => {
-  const courseid='1'
+const CourseInfo = ({pageContext}) => {
+  const {coursename}=pageContext
   const userid=localStorage.getItem('id')
   const coursebrief = "This is a brief introduction to the course"
   const teacherbrief = "This is a brief introduction to the teacher"
-  console.log(data.mdx.frontmatter)
   return (
     <div style={{height:'100%'}}>
       <ResponsiveAppBar></ResponsiveAppBar>
@@ -35,14 +34,14 @@ const CourseInfo = ({ props, children,data }) => {
           fontSize:'50px',
           
         }}>Advanced Math</Typography>
-        <Button sx={{display:'inline',marginLeft:'50px'}} variant='contained' href={`${liveserver}/dashboard/canvas-designer.html?open=true&sessionid=${courseid}&publicRoomIdentifier=dashboard&userFullName=${userid}`} onClick={() => {
-          navigate(`${liveserver}/dashboard/canvas-designer.html?open=true&sessionid=${courseid}&publicRoomIdentifier=dashboard&userFullName=${userid}`)
+        <Button sx={{display:'inline',marginLeft:'50px'}} variant='contained' href={`${liveserver}/dashboard/canvas-designer.html?open=true&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${userid}`} onClick={() => {
+          navigate(`${liveserver}/dashboard/canvas-designer.html?open=true&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${userid}`)
         }}>Open Liveroom</Button>
-        <Button sx={{display:'inline',marginLeft:'50px'}} variant='contained' href={`${liveserver}/dashboard/canvas-designer.html?open=false&sessionid=${courseid}&publicRoomIdentifier=dashboard&userFullName=${userid}`} onClick={() => {
-          navigate(`${liveserver}/dashboard/canvas-designer.html?open=true&sessionid=${courseid}&publicRoomIdentifier=dashboard&userFullName=${userid}`)
+        <Button sx={{display:'inline',marginLeft:'50px'}} variant='contained' href={`${liveserver}/dashboard/canvas-designer.html?open=false&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${userid}`} onClick={() => {
+          navigate(`${liveserver}/dashboard/canvas-designer.html?open=true&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${userid}`)
         }}>Join Liveroom</Button>
         <SimpleDialogDemo></SimpleDialogDemo>
-        <BasicTabs courseintro={data.mdx.frontmatter.courseintro} teacherintro={data.mdx.frontmatter.teacherintro}></BasicTabs>
+        <BasicTabs courseintro={coursebrief} teacherintro={teacherbrief}></BasicTabs>
       </Box>
     </div>
   )

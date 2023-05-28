@@ -38,14 +38,14 @@ function TabPanel(props) {
           <Grid container columnSpacing={8}>
             <Grid item container xs={8} rowSpacing={4}>
               <Grid item xs={12}>
-                <Paper sx={{pr:'10%',pl:'10%'}} elevation={4}>
+                <Paper sx={{pr:'10%',pl:'10%',minHeight:'400px'}} elevation={4} >
                   <Typography sx={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '30px' }}>Introduction</Typography>
                   <Divider></Divider>
                   <Typography>{courseintro}</Typography>
                 </Paper>
               </Grid>
               <Grid item xs={12}>
-                <Paper sx={{pr:'10%',pl:'10%'}} elevation={4}>
+                <Paper sx={{pr:'10%',pl:'10%',minHeight:'400px'}} elevation={4}>
                   <Typography sx={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '30px' }}>Professor</Typography>
                   <Divider></Divider>
                   <Typography>{teacherintro}</Typography>

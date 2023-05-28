@@ -35,12 +35,16 @@ const Login = () => {
                     const role=res.role
                     localStorage.setItem("id",id);
                     localStorage.setItem("role",role)
+                    localStorage.setItem('username',username)
                     navigate("/browse");
                 }
                 else{
                     alert("Login failed");
                 }
-            }}>Login</Button>            
+            }}>Login</Button>
+            <Button variant='text' onClick={()=>{
+                navigate('/register')
+            }}>注册</Button>            
         </Stack>
     </Paper> )   
 }

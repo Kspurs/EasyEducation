@@ -1,5 +1,6 @@
 {
     "workbench.colorTheme": "GitHub Dark",
     "editor.fontLigatures": true,
-    "editor.fontFamily": "'Cascadia Code', Consolas, 'Courier New', monospace"
+    "editor.fontFamily": "'Cascadia Code', Consolas, 'Courier New', monospace",
+    "editor.fontSize": 20
 }

@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {AdvancedImage} from '@cloudinary/react';
 import {Cloudinary} from "@cloudinary/url-gen";
+import { StaticImage } from 'gatsby-plugin-image';
 
 export default function MediaCard({ coursename}) {
   const cld = new Cloudinary({
@@ -16,19 +17,19 @@ export default function MediaCard({ coursename}) {
   })
   const image=cld.image('_avatar')
   return (
-    <Card sx={{ maxWidth: 300 }}>
+    <Card sx={{ maxWidth: 200,display:'inline-block',mr:'20px' }}>
     <CardContent>
         <CardMedia>
-          <AdvancedImage cldImg={image} ></AdvancedImage>
+          <StaticImage src='../images/icon.png'></StaticImage>
         </CardMedia>
-        <Typography gutterBottom variant="h5" component="div" href="/courseinfo">
+        <Typography gutterBottom variant="h5" component="div" sx={{fontSize:'20px'}} href="/courseinfo">
           {coursename}
         </Typography>
         <Typography variant="body2" color="text.secondary">
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" href={`/courseinfo/${coursename}`}>Learn More</Button>
+        <Button size="small" href={`/courseinfo/`}>查看详情</Button>
       </CardActions>
     </Card>
   );

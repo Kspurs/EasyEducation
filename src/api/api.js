@@ -4,7 +4,7 @@ const cloudName="dkehsqtv6"
 const api_key="341428297654848"
 const call = async (url, method, data) => {
     const res = await fetch(url, {
-        method: 'POST',
+        method: method,
         headers: {
             'Content-Type': 'application/json'
         }
@@ -23,7 +23,7 @@ const addCourse=(usrname,coursename)=>{
     return data
 }
 const getSelectedCourse=(usrname)=>{
-    const data=call(url+'/getSelectedCourse','GET',{usrname:usrname})
+    const data=call(url+'/getSelectedCourse','POST',{usrname:usrname})
     return data
 }
 const createcourse = (coursename, description, courseteacher, courseweekday, coursestarttime, coursemax) => {
@@ -33,8 +33,12 @@ const createcourse = (coursename, description, courseteacher, courseweekday, cou
     return res;
 }
 const getteachercourses = (teacherid) => {
-    const res = call(url + "/getteachercourses", "GET", { teacherid: teacherid })
+    const res = call(url + "/getteachercourses", "POST", { teacherid: teacherid })
     return res;
+}
+const getAllcourses=()=>{
+    const res=call(url+'/getAllcourses','POST')
+    return res
 }
 const uploadfile=(file,filename)=>{
  // Assuming you have a File object
@@ -50,4 +54,9 @@ fileReader.onload = async function () {
 
 fileReader.readAsDataURL(file);
 }
-export {addCourse,getSelectedCourse, uploadfile,login, createcourse ,getteachercourses}
+const register = (usrname, pswd,role,email) => {
+    const data = call(url + "/register", "POST", { usrname: usrname, pwd: pswd,role:role,email:email})
+    return data;
+}
+
+export {register,getAllcourses,addCourse,getSelectedCourse, uploadfile,login, createcourse ,getteachercourses}

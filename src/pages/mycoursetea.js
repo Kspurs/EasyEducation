@@ -10,7 +10,7 @@ const MyCourseTea = () => {
        <main >
         <ResponsiveAppBar></ResponsiveAppBar>
         <Box marginLeft={'20%'} marginRight={'20%'} marginTop={'10px'} display={'flex'} flexWrap={'wrap'}>
-            {courses.map((course) => (<CourseCard key={course.name} coursename={course.coursename} courseavatar={course.avatar}></CourseCard>))}
+            {courses.map((course) => (<CourseCard key={course.name} coursename={course.coursename}></CourseCard>))}
 
         </Box>
        </main>

@@ -13,11 +13,12 @@ import { Barchart } from '../components/barchart';
 import { Piechart } from '../components/piechart';
 import { getSelectedCourse } from '../api/api';
 import { async } from '@babel/runtime/helpers/regeneratorRuntime';
+import { navigate } from 'gatsby-link';
 const Mycourse = () => {
     const [searchWord, setSearchWord] = useState('')
     const [selectedcourses, setSelectedCourses] = useState([])
     React.useEffect(async() => {
-        const res = await getSelectedCourse(localStorage.getItem("id"));
+        const res = await getSelectedCourse(localStorage.getItem("username"));
         setSelectedCourses(res.data);
     }, [])
     return (
@@ -53,7 +54,7 @@ const Mycourse = () => {
                             <Button variant='text' color='info'>{course}</Button>
                         ))}
                         </Stack>
-                        <Button variant='contained' sx={{bgcolor:green[500]}}>添加课程</Button>
+                        <Button variant='contained' sx={{bgcolor:green[500]}} onClick={()=>navigate('/addcourse')}>添加课程</Button>
                         </Box>
                 </Paper>
                 </Box>

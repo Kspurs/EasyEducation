@@ -15,8 +15,8 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { purple ,blue} from '@mui/material/colors';
 import { navigate } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
-const stupages = [{name:'浏览',url:'/browse'},{name:'我的课程',url:'/mycourse'},{name:'添加课程',url:'/addcourse'}];
-const teapages = [{name:'浏览',url:'/browse'},{name:'我的课程',url:'/mycoursetea'},{name:'创建课程',url:'/createcourse'}];
+const stupages = [{name:'浏览',url:'/browse'},{name:'我的课程',url:'/mycourse'},{name:'添加课程',url:'/addcourse'},{name:'个人中心',url:'/profile'}];
+const teapages = [{name:'浏览',url:'/browse'},{name:'我的课程',url:'/mycoursetea'},{name:'创建课程',url:'/createcourse'},{name:'个人中心',url:'/profile'}];
 
 const settings = ['Profile', 'Logout'];
 
