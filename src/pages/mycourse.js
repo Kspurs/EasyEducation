@@ -14,12 +14,16 @@ import { Piechart } from '../components/piechart';
 import { getSelectedCourse } from '../api/api';
 import { async } from '@babel/runtime/helpers/regeneratorRuntime';
 import { navigate } from 'gatsby-link';
+import { Link } from 'gatsby';
 const Mycourse = () => {
     const [searchWord, setSearchWord] = useState('')
     const [selectedcourses, setSelectedCourses] = useState([])
-    React.useEffect(async() => {
+    const func=async()=>{
         const res = await getSelectedCourse(localStorage.getItem("username"));
         setSelectedCourses(res.data);
+    }
+    React.useEffect(() => {
+        func()
     }, [])
     return (
         <main style={{ height: '100%', marginBottom: '0 ' }}>

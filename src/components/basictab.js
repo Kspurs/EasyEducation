@@ -20,6 +20,11 @@ import { Link } from '@mui/material/';
 import CheckTwoToneIcon from '@mui/icons-material/CheckTwoTone';
 import ErrorOutlineTwoToneIcon from '@mui/icons-material/ErrorOutlineTwoTone';
 import { PieChart } from '@mui/icons-material';
+import CourseselectTable from './courseselecttable';
+import { useState } from 'react';
+import { async } from '@babel/runtime/helpers/regeneratorRuntime';
+import { download, getallfiles, upload } from '../api/api';
+import { useEffect } from 'react';
 
 function TabPanel(props) {
   const { children, value, index, courseintro, teacherintro, ...other } = props;
@@ -69,10 +74,37 @@ function TabPanel(props) {
     </div>
   );
 }
+function TabPanel1(props) {
+  const { children, value, index, courseintro, teacherintro, ...other } = props;
+  const rows=[['admin',3,10,100,3]]
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+      style={{height:'max-content'}}
+    >
+      {value === index && (
+        <Box sx={{ pl: "10%",pr:'10%' ,pt:'5%',height:'100%'}}>
+          <CourseselectTable rows={rows}></CourseselectTable>
+        </Box>
+      )}
+    </div>
+  );
+}
 function HomeworkPanel(props) {
-  const { children, value, index, ...other } = props;
-  const homeworks=[{name:'homework1',date:'2023-5-4',state:0},{name:'homework2',date:'2023-5-4',state:1},{name:'homework3',date:'2023-5-4',state:0}]
-  const files=[{name:'Chapter1.pptx',date:'2023-5-4',state:0},{name:'Chapter2.pptx',date:'2023-5-4',state:1},{name:'Chapter3.mp4',date:'2023-5-4',state:0}]
+  const {coursename, children, value, index, ...other } = props;
+  const [file,setfile]=useState(null)
+  const [filelst,setfilelst]=useState([])
+  const func=async()=>{
+    const res=await getallfiles(coursename)
+    setfilelst(res.data)
+  }
+  useEffect(()=>{
+    func()
+  },[])
   return (
     <div
       role="tabpanel"
@@ -88,37 +120,25 @@ function HomeworkPanel(props) {
           <Grid item container xs={8} rowSpacing={4}>
             <Grid item xs={12}>
               <Paper sx={{pr:'10%',pl:'10%'}} elevation={4}>
-                <Typography sx={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '30px' }}>Homework</Typography>
-                <Divider></Divider>
-                {homeworks.map(
-                  (hwk)=>(
-                    <div>
-                    <Stack direction="row" gap="20%" paddingBottom="10px" paddingTop="10px">
-                      <Link>{hwk.name}</Link>
-                      <Typography>{hwk.date}</Typography>
-                      {
-                          hwk.state===0&&(<ErrorOutlineTwoToneIcon color={grey[200]}></ErrorOutlineTwoToneIcon>)
-                      }
-                      {
-                          hwk.state===1&&(<CheckTwoToneIcon color={green[200]}></CheckTwoToneIcon>)
-                      }
-                    </Stack>
-                    <Divider></Divider>
-                    </div>
-                  )
-                )}
-              </Paper>
-            </Grid>
-            <Grid item xs={12}>
-              <Paper sx={{pr:'10%',pl:'10%'}} elevation={4}>
                 <Typography sx={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '30px' }}>Files</Typography>
                 <Divider></Divider>
-                {files.map(
+                {filelst.map(
                   (hwk)=>(
                     <div>
                     <Stack direction="row" gap="20%" paddingBottom="10px" paddingTop="10px">
-                      <Link>{hwk.name}</Link>
-                      <Typography>{hwk.date}</Typography>
+                      <Link>{hwk}</Link>
+        
+                      <Button onClick={async()=>{
+                        const res=await download(hwk,coursename)
+                        res.blob().then((blob)=>{
+                          const url=window.URL.createObjectURL(blob)
+                          const a=document.createElement('a')
+                          a.href=url
+                          a.download=hwk
+                          a.click()
+                        }
+                        )
+                      }}>下载</Button>
                     </Stack>
                     <Divider></Divider>
                     </div>
@@ -130,8 +150,18 @@ function HomeworkPanel(props) {
           <Grid item container xs={4} rowSpacing={2}>
             <Grid item xs={12}>
             <Paper elevation={4}>
-              <Typography align='center' sx={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '30px' }}>Assignment Submission Status</Typography>
-              <Divider></Divider>
+            <h1>上传资源</h1>
+            {localStorage.getItem('role')==='teacher'&&(
+              <form onSubmit={(e)=>{
+                e.preventDefault()
+                const formData=new FormData()
+                formData.append('file',file)
+                const res=upload(formData)
+                alert('上传成功')
+              }} encType="multipart/form-data"><input type='file' name='file' onChange={(event)=>{
+              setfile(event.target.files[0])
+              console.log(file)
+            }}></input><input type='submit' value={'上传'}></input></form>)}
               
             </Paper>
             </Grid>
@@ -160,7 +190,7 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs({ courseintro, teacherintro }) {
+export default function BasicTabs({ courseintro, teacherintro,coursename }) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -171,15 +201,17 @@ export default function BasicTabs({ courseintro, teacherintro }) {
     <Box sx={{ width: '100%' ,height:'100%'}}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Course Introduction" {...a11yProps(0)} />
-          <Tab label="Course Resources" {...a11yProps(1)} />
+          <Tab label="课程介绍" {...a11yProps(0)} />
+          <Tab label="课程资源" {...a11yProps(1)} />
+          <Tab label='选课名单' {...a11yProps(2)}/>
         </Tabs>
       </Box>
       <TabPanel value={value} index={0} courseintro={courseintro} teacherintro={teacherintro}>
       </TabPanel>
-      <HomeworkPanel value={value} index={1} homeworklst={["Homework1", "Homework2", "Homework3"]}>
+      <HomeworkPanel value={value} index={1} coursename={coursename}>
 
       </HomeworkPanel>
+      <TabPanel1 value={value} index={2}></TabPanel1>
     </Box>
   );
 }

@@ -13,9 +13,12 @@ import { Box } from '@mui/material';
 import { graphql, navigate, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import SimpleDialogDemo from '../components/liveroomuserdialog';
+import { async } from '@babel/runtime/helpers/regeneratorRuntime';
+import { openLivingroom } from '../api/api';
+import { cleanDigitSectionValue } from '@mui/x-date-pickers/internals/hooks/useField/useField.utils';
 const liveserver = "http://localhost:9001/demos"
-const CourseInfo = ({pageContext}) => {
-  const {coursename}=pageContext
+const CourseInfo = (props) => {
+  const coursename=props.location.state.coursename
   const userid=localStorage.getItem('id')
   const coursebrief = "This is a brief introduction to the course"
   const teacherbrief = "This is a brief introduction to the teacher"
@@ -33,15 +36,16 @@ const CourseInfo = ({pageContext}) => {
           textDecoration: 'none',
           fontSize:'50px',
           
-        }}>Advanced Math</Typography>
-        <Button sx={{display:'inline',marginLeft:'50px'}} variant='contained' href={`${liveserver}/dashboard/canvas-designer.html?open=true&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${userid}`} onClick={() => {
-          navigate(`${liveserver}/dashboard/canvas-designer.html?open=true&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${userid}`)
-        }}>Open Liveroom</Button>
+        }}>{coursename}</Typography>
+        {localStorage.getItem('role')==='teacher'&&(<Button sx={{display:'inline',marginLeft:'50px'}} variant='contained' href={`${liveserver}/dashboard/canvas-designer.html?open=true&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${userid}`} onClick={async() => {
+            const res=await openLivingroom(coursename)
+            console.log(res)
+        }}>开启直播间</Button>)}
         <Button sx={{display:'inline',marginLeft:'50px'}} variant='contained' href={`${liveserver}/dashboard/canvas-designer.html?open=false&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${userid}`} onClick={() => {
-          navigate(`${liveserver}/dashboard/canvas-designer.html?open=true&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${userid}`)
-        }}>Join Liveroom</Button>
-        <SimpleDialogDemo></SimpleDialogDemo>
-        <BasicTabs courseintro={coursebrief} teacherintro={teacherbrief}></BasicTabs>
+          navigate(`${liveserver}/dashboard/canvas-designer.html?open=false&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${userid}`)
+        }}>加入直播间</Button>
+        {localStorage.getItem('role')==='teacher'&&(<SimpleDialogDemo></SimpleDialogDemo>)}
+        <BasicTabs coursename={coursename} courseintro={coursebrief} teacherintro={teacherbrief}></BasicTabs>
       </Box>
     </div>
   )

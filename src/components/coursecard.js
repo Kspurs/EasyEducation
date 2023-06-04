@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import {AdvancedImage} from '@cloudinary/react';
 import {Cloudinary} from "@cloudinary/url-gen";
 import { StaticImage } from 'gatsby-plugin-image';
-
+import { Link } from 'gatsby';
 export default function MediaCard({ coursename}) {
   const cld = new Cloudinary({
     cloud:{
@@ -29,7 +29,7 @@ export default function MediaCard({ coursename}) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" href={`/courseinfo/`}>查看详情</Button>
+        <Link to='/courseinfo' state={{coursename:coursename}}>查看详情</Link>
       </CardActions>
     </Card>
   );

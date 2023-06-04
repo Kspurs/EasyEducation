@@ -12,6 +12,17 @@ const call = async (url, method, data) => {
         body: JSON.stringify(data),
 
     })
+    if(method=='GET'){
+        return res
+    }
+    return await res.json();
+}
+const call2 = async (url, method, data) => {
+    const res = await fetch(url, {
+        method: method,
+        body: data,
+
+    })
     return await res.json();
 }
 const login = (usrname, pswd) => {
@@ -33,11 +44,20 @@ const createcourse = (coursename, description, courseteacher, courseweekday, cou
     return res;
 }
 const getteachercourses = (teacherid) => {
-    const res = call(url + "/getteachercourses", "POST", { teacherid: teacherid })
+    const res = call(url + "/getTeacherCourses", "POST", { teacherid: teacherid })
     return res;
 }
 const getAllcourses=()=>{
     const res=call(url+'/getAllcourses','POST')
+    return res
+}
+const getAllLivingrooms=()=>{
+    const res=call(url+'/getAllLivingrooms','POST')
+    return res
+}
+const openLivingroom=(coursename)=>{
+    console.log(coursename)
+    const res=call(url+'/openLivingroom','POST',{coursename:coursename})
     return res
 }
 const uploadfile=(file,filename)=>{
@@ -58,5 +78,32 @@ const register = (usrname, pswd,role,email) => {
     const data = call(url + "/register", "POST", { usrname: usrname, pwd: pswd,role:role,email:email})
     return data;
 }
-
-export {register,getAllcourses,addCourse,getSelectedCourse, uploadfile,login, createcourse ,getteachercourses}
+const getalluser=()=>{
+    const data=call(url+'/getalluser','POST',{})
+    return data
+}
+const addUser=(usrname,pwd,role,email)=>{
+    const data=call(url+'/addUser','POST',{usrname:usrname,pwd:pwd,role:role,email:email})
+    return data
+}
+const deleteUser=(usrname)=>{
+    const data=call(url+'/deleteUser','POST',{usrname:usrname})
+    return data
+}
+const getcoursestudent=(coursename)=>{
+    const data=call(url+'/getcoursestudent','POST',{coursename:coursename})
+    return data
+}
+const upload=(formdata)=>{
+    const data=call2(url+'/upload','POST',formdata)
+    return data
+}
+const getallfiles=(coursename)=>{
+    const data=call(url+'/getallfiles','POST',{coursename:coursename})
+    return data
+}
+const download=(filename,coursename)=>{
+    const data=call(url+`/download?coursename=${coursename}&filename=${filename}`,'GET')
+    return data
+}
+export {upload,download,getallfiles,getcoursestudent,openLivingroom,getAllLivingrooms,register,getAllcourses,addCourse,getSelectedCourse, uploadfile,login, createcourse ,getteachercourses,getalluser,deleteUser,addUser}

@@ -13,7 +13,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
-import { CheckBox } from '@mui/icons-material';
+import { Checkbox } from '@mui/material';
+import { Box,TextField } from '@mui/material';
 const emails = ['摄像头', '屏幕', '麦克风'];
 
 function SimpleDialog(props) {
@@ -29,16 +30,19 @@ function SimpleDialog(props) {
 
   return (
     <Dialog onClose={handleClose} open={open} maxWidth='sm' fullWidth>
-      <DialogTitle>Users</DialogTitle>
+      <DialogTitle>直播设置</DialogTitle>
       <List sx={{ pt: 0 }}>
         {emails.map((email) => (
           <ListItem disableGutters>
             <ListItemButton onClick={() => handleListItemClick(email)} key={email}>
               <ListItemText primary={email} />
-              <CheckBox ></CheckBox>
             </ListItemButton>
+            <Checkbox defaultChecked></Checkbox>
           </ListItem>
+        
+        
         ))}
+        <TextField label="直播间标题"></TextField>
       </List>
     </Dialog>
   );

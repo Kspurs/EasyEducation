@@ -17,7 +17,7 @@ import { navigate } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
 const stupages = [{name:'浏览',url:'/browse'},{name:'我的课程',url:'/mycourse'},{name:'添加课程',url:'/addcourse'},{name:'个人中心',url:'/profile'}];
 const teapages = [{name:'浏览',url:'/browse'},{name:'我的课程',url:'/mycoursetea'},{name:'创建课程',url:'/createcourse'},{name:'个人中心',url:'/profile'}];
-
+const adminpages=[{name:'人员管理',url:'/usermanage'}]
 const settings = ['Profile', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -36,9 +36,9 @@ function ResponsiveAppBar() {
   };
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+    navigate('/login');
   };
-
+console.log(localStorage.getItem('role')==='admin')
   return (
     <AppBar position="static" color='inherit'>
       <Container maxWidth="xl">
@@ -91,6 +91,11 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
+              {(localStorage.getItem('role')==='admin'?adminpages:[]).map((page) => (
+                <MenuItem key={page.name} onClick={()=>navigate(`${page.url}`)}>
+                  <Typography textAlign="center" href={`localhost/${page.url}`}>{page.name}</Typography>
+                </MenuItem>
+              ))}
               {(localStorage.getItem('role')==='student'?stupages:teapages).map((page) => (
                 <MenuItem key={page.name} onClick={()=>navigate(`${page.url}`)}>
                   <Typography textAlign="center" href={`localhost/${page.url}`}>{page.name}</Typography>
@@ -100,7 +105,7 @@ function ResponsiveAppBar() {
           </Box>
           
           <Box sx={{ flexGrow: 3, display: { xs: 'none', md: 'flex' } }}>
-            {(localStorage.getItem('role')==='student'?stupages:teapages).map((page) => (
+            {(localStorage.getItem('role')==='student'?stupages:(localStorage.getItem('role')==='teacher'?teapages:adminpages)).map((page) => (
               <Box>
               <Button
                 key={page.name}

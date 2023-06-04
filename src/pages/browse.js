@@ -18,10 +18,11 @@ const Courselink = ({ coursename, coursestate }) => {
         <Paper elevation={4} sx={{ textAlign: 'center' }}><Button href='/liveroom' variant="text" sx={{ color: 'black', fontFamily: 'monospace', fontSize: '20px' }}>{coursename}</Button></Paper>
     )
 }
+
 const CourseBrowser = () => {
     const livingcourse = ['高等数学']
     const [allcourses, setallcourses] = useState([])
-    React.useEffect(async () => {
+    const func=async()=>{
         const res = await getAllcourses()
         console.log(res)
         const tmparr = []
@@ -30,6 +31,9 @@ const CourseBrowser = () => {
         });
         console.log(tmparr)
         setallcourses(tmparr)
+    }
+    React.useEffect(() => {
+        func()
     },[])
     return (
         <Box>
@@ -57,6 +61,17 @@ const CourseBrowser = () => {
                 <Box flexGrow={1} display={'flex'} flexDirection={'column'}>
                     <Paper elevation={4} sx={{pl:'10%',pr:'10%',minHeight:'500px'}}>
                         <Typography sx={{textAlign:'center',fontFamily:'monospace',fontWeight:700}}>欢迎来到EasyEducation</Typography>
+                        <br></br>
+                        <Typography sx={{textAlign:'center',fontFamily:'monospace',fontWeight:700}}>EasyEducation是一个优秀的在线教育平台</Typography>
+                        <br></br>
+                        <Typography sx={{textAlign:'center',fontFamily:'monospace',fontWeight:700}}>当前登录用户为：{localStorage.getItem('username')}</Typography>
+                        <br></br>
+                        <Typography sx={{textAlign:'center',fontFamily:'monospace',fontWeight:700}}>当前登录用户类型为：{localStorage.getItem('role')}</Typography>
+                        <br></br>
+                        <Button onClick={()=>{
+                            localStorage.clear()
+                            navigate('/login')
+                        }}>退出登录</Button>
                     </Paper>
                 </Box>
             </Box>

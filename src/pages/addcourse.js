@@ -8,7 +8,7 @@ const allcourses=['高等数学','C语言','大学物理','线性代数','大学
 
 const Addcourse=()=>{
     console.log(localStorage.getItem('username'))
-    useEffect(async()=>{
+    const func=async()=>{
         const res=await getSelectedCourse(localStorage.getItem("username"))
         const tmparr=[]
         console.log(res.data[0][0])
@@ -16,6 +16,9 @@ const Addcourse=()=>{
             tmparr.push(element[0])
         });
         setSelectedCourses(tmparr)
+    }
+    useEffect(()=>{
+        func()
     },[])
     const [selectedcourses,setSelectedCourses]=useState([])
     console.log(selectedcourses)
