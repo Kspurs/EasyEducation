@@ -17,7 +17,7 @@ import { navigate } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
 const stupages = [{name:'浏览',url:'/browse'},{name:'我的课程',url:'/mycourse'},{name:'添加课程',url:'/addcourse'},{name:'个人中心',url:'/profile'}];
 const teapages = [{name:'浏览',url:'/browse'},{name:'我的课程',url:'/mycoursetea'},{name:'创建课程',url:'/createcourse'},{name:'个人中心',url:'/profile'}];
-const adminpages=[{name:'人员管理',url:'/usermanage'}]
+const adminpages=[{name:'人员管理',url:'/usermanage'},{name:'课程概况',url:'/coursebrief'}]
 const settings = ['Profile', 'Logout'];
 
 function ResponsiveAppBar() {

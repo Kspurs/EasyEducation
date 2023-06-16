@@ -15,6 +15,7 @@ import { getSelectedCourse } from '../api/api';
 import { async } from '@babel/runtime/helpers/regeneratorRuntime';
 import { navigate } from 'gatsby-link';
 import { Link } from 'gatsby';
+import CourseTable from 'course-table'
 const Mycourse = () => {
     const [searchWord, setSearchWord] = useState('')
     const [selectedcourses, setSelectedCourses] = useState([])
@@ -22,6 +23,49 @@ const Mycourse = () => {
         const res = await getSelectedCourse(localStorage.getItem("username"));
         setSelectedCourses(res.data);
     }
+    const courseTables = {
+        1: [
+          {
+            startTime:1551920827000,
+            endTime:1551924427000,
+            stuNameList: ['admin'],
+            teaName: 'adminteacher',
+            courseName:'高等数学'
+          }
+        ],
+        2:[{
+            startTime:1551920827000,
+            endTime:1551924427000,
+            stuNameList: ['admin'],
+            teaName: 'adminteacher',
+            courseName:'线性代数'
+          }],
+          3:[{
+            startTime:1551920827000,
+            endTime:1551924427000,
+            stuNameList: ['admin'],
+            teaName: 'adminteacher',
+            courseName:'大学英语'
+          }],
+          4:[{
+            startTime:1551920827000,
+            endTime:1551924427000,
+            stuNameList: ['admin'],
+            teaName: 'adminteacher',
+            courseName:'大学体育'
+          }],
+          5:[{
+            startTime:1551920827000,
+            endTime:1551924427000,
+            stuNameList: ['admin'],
+            teaName: 'adminteacher',
+            courseName:'大学物理'
+          }]
+      };
+  
+  const handleConfirm = (data,handleOK) => {
+      handleOK()
+  };
     React.useEffect(() => {
         func()
     }, [])
@@ -72,13 +116,9 @@ const Mycourse = () => {
                             <Piechart></Piechart>
                         </Paper>
                     </Box>
-                    <Box display={'flex'} flexDirection={'row'} justifyContent={'space-between'}>
-                        <Paper sx={{ position: 'relative', height: '40vh', pl: '10px', pr: '10px', flexGrow: 1, flexBasis: '30vw', marginRight: '10px' }} elevation={4} >
-                            <Barchart></Barchart>
-                        </Paper>
-                        <Paper sx={{ display: 'flex', justifyContent: 'center', position: 'relative', height: '40vh', pl: '10px', pr: '10px', flexGrow: 1, flexBasis: '30vw' }} elevation={4} >
-                            <Piechart></Piechart>
-                        </Paper>
+                    <Box display={'flex'} flexDirection={'row'} justifyContent={'space-between'} mt='20px'>
+                        <Typography textAlign={'center'} fontSize={'30px'}>课程表</Typography>
+                        <CourseTable courseTables={courseTables} handleConfirm={handleConfirm}></CourseTable>
                     </Box>
                     
                 </Box>

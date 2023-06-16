@@ -37,13 +37,13 @@ export const options = {
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const labels = ['必修课', '通识选修课', '专业选修课', '体育课'];
 
 export const data = {
   labels,
   datasets: [
     {
-      label: 'Dataset 1',
+      label: '选课情况',
       data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
       backgroundColor: ['rgb(255, 99, 132)',
       'rgb(54, 162, 235)',

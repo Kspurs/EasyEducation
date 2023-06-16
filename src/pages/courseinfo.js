@@ -19,7 +19,7 @@ import { cleanDigitSectionValue } from '@mui/x-date-pickers/internals/hooks/useF
 const liveserver = "http://localhost:9001/demos"
 const CourseInfo = (props) => {
   const coursename=props.location.state.coursename
-  const userid=localStorage.getItem('id')
+  const username=localStorage.getItem('username')
   const coursebrief = "This is a brief introduction to the course"
   const teacherbrief = "This is a brief introduction to the teacher"
   return (
@@ -37,12 +37,12 @@ const CourseInfo = (props) => {
           fontSize:'50px',
           
         }}>{coursename}</Typography>
-        {localStorage.getItem('role')==='teacher'&&(<Button sx={{display:'inline',marginLeft:'50px'}} variant='contained' href={`${liveserver}/dashboard/canvas-designer.html?open=true&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${userid}`} onClick={async() => {
+        {localStorage.getItem('role')==='teacher'&&(<Button sx={{display:'inline',marginLeft:'50px'}} variant='contained' href={`${liveserver}/dashboard/canvas-designer.html?open=true&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${username}`} onClick={async() => {
             const res=await openLivingroom(coursename)
             console.log(res)
         }}>开启直播间</Button>)}
-        <Button sx={{display:'inline',marginLeft:'50px'}} variant='contained' href={`${liveserver}/dashboard/canvas-designer.html?open=false&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${userid}`} onClick={() => {
-          navigate(`${liveserver}/dashboard/canvas-designer.html?open=false&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${userid}`)
+        <Button sx={{display:'inline',marginLeft:'50px'}} variant='contained' href={`${liveserver}/dashboard/canvas-designer.html?open=false&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${username}`} onClick={() => {
+          navigate(`${liveserver}/dashboard/canvas-designer.html?open=false&sessionid=${coursename}&publicRoomIdentifier=dashboard&userFullName=${username}`)
         }}>加入直播间</Button>
         {localStorage.getItem('role')==='teacher'&&(<SimpleDialogDemo></SimpleDialogDemo>)}
         <BasicTabs coursename={coursename} courseintro={coursebrief} teacherintro={teacherbrief}></BasicTabs>

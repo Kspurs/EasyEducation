@@ -33,6 +33,7 @@
     "buffer": "^6.0.3",
     "chart.js": "^4.3.0",
     "cloudinary-react": "^1.8.1",
+    "course-table": "^1.1.6",
     "dayjs": "^1.11.7",
     "faker": "^6.6.6",
     "flv.js": "^1.6.2",

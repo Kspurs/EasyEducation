@@ -34,14 +34,14 @@ export const options = {
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const labels = ['高等数学', '线性代数', '大学英语'];
 
 export const data = {
   labels,
   datasets: [
     {
-      label: 'Dataset 1',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+      label: '上课次数',
+      data: labels.map(() => faker.datatype.number({ min: 0, max: 10 })),
       backgroundColor: 'rgba(177, 188, 132, 0.5)',
     }
   ],
